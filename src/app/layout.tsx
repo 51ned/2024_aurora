@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 
 import { Montserrat } from 'next/font/google'
 
+import '../../public/globals.scss'
+
 
 const montserrart = Montserrat({ subsets: ['cyrillic'] })
 

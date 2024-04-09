@@ -1,4 +1,4 @@
-import styles from './page.module.css'
+import s from './page.module.scss'
 
 
 export default function Home() {
@@ -6,5 +6,5 @@ export default function Home() {
     <main>
       <h1>Hello, world!</h1>
     </main>
-  );
+  )
 }

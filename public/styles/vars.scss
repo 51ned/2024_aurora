@@ -1,0 +1,16 @@
+// layout
+
+$layout-max-width: 1240px;
+$layout-min-width: 360px;
+
+$layout-cols-num: 15;
+
+$layout-max-col-width: calc($layout-max-width / $layout-cols-num);
+$layout-min-col-width: calc($layout-min-width / $layout-cols-num);
+
+$layout-pref-col-width: minmax($layout-min-col-width, $layout-max-col-width);
+
+
+// indents
+
+//  ...

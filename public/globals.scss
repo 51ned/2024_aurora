@@ -1,0 +1,39 @@
+@import './styles/vars';
+
+
+html {
+  scroll-behavior: smooth;
+  touch-action: manipulation;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 
+    [fullbleed-start] minmax(0, 1fr)
+    [leftbar-start] repeat(2, $layout-pref-col-width)
+    [leftbar-end data-start] repeat(12, $layout-pref-col-width)
+    [data-end rightbar-start] $layout-pref-col-width
+    [rightbar-end] minmax(0, 1fr) [fullbleed-end];
+  grid-template-rows: repeat(2, min-content) 1fr min-content;  
+  margin-block: 0;
+  margin-inline: 0;
+  min-height: 100lvh;
+}
+
+header, main, footer {
+  display: grid;
+  grid-column: fullbleed;
+  grid-template-columns: subgrid;
+}
+
+header { grid-row: 2; }
+
+main { grid-row: 3; }
+
+footer { grid-row: 4; }
+
+nav, aside { grid-row: 1 / span 2; }
+
+nav { grid-column: leftbar; }
+
+aside { grid-column: rightbar; }
