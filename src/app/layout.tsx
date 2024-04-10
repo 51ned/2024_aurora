@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 
@@ -41,7 +43,9 @@ export default function RootLayout({
         <Aside />
         <Footer />
 
-        <GTM />
+        <Suspense>
+          <GTM />
+        </Suspense>
       </body>
     </html>
   )
