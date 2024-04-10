@@ -1,7 +1,9 @@
-@import './styles/vars';
+@import './styles/breakpoints';
+@import './styles/geometry';
 
 
 html {
+  color: #fff; // temp!
   scroll-behavior: smooth;
   touch-action: manipulation;
 }
@@ -9,31 +11,81 @@ html {
 body {
   display: grid;
   grid-template-columns: 
-    [fullbleed-start] minmax(0, 1fr)
+    [fullbleed-start] minmax(0, 1fr) // change 0 to some var!!!
     [leftbar-start] repeat(2, $layout-pref-col-width)
     [leftbar-end data-start] repeat(12, $layout-pref-col-width)
     [data-end rightbar-start] $layout-pref-col-width
-    [rightbar-end] minmax(0, 1fr) [fullbleed-end];
+    [rightbar-end] minmax(0, 1fr) [fullbleed-end]; // change 0 to some var!!!
   grid-template-rows: repeat(2, min-content) 1fr min-content;  
   margin-block: 0;
   margin-inline: 0;
   min-height: 100lvh;
+
+  @media (max-width: $tablet) {
+    grid-template-columns: 
+      [fullbleed-start] minmax(0, 1fr)
+      [leftbar-start] 0
+      [leftbar-end data-start] repeat(12, $layout-pref-col-width)
+      [data-end rightbar-start] $layout-pref-col-width
+      [rightbar-end] minmax(0, 1fr) [fullbleed-end]; // don't forget think about this!
+  }
+
+  @media (max-width: $mobile) {
+    grid-template-columns: 
+      [fullbleed-start] minmax(0, 1fr)
+      [leftbar-start] 0
+      [leftbar-end data-start] repeat(12, $layout-pref-col-width)
+      [data-end rightbar-start] 0
+      [rightbar-end] minmax(0, 1fr) [fullbleed-end];
+  }
 }
 
 header, main, footer {
   display: grid;
   grid-column: fullbleed;
   grid-template-columns: subgrid;
+  place-content: center; // temp!
 }
 
-header { grid-row: 2; }
+header {
+  background-color: orange; // temp!
+  grid-row: 2;
+}
 
-main { grid-row: 3; }
+main {
+  background-color: green; // temp!
+  grid-row: 3;
+}
 
-footer { grid-row: 4; }
+footer {
+  background-color: blue; // temp!
+  grid-row: 4;
+}
 
-nav, aside { grid-row: 1 / span 2; }
+nav, aside {
+  align-items:  center; // temp!
+  display: flex; // temp!
+  grid-row: 2 / span 3;
+  justify-content: center; // temp!
+}
 
-nav { grid-column: leftbar; }
+nav {
+  background-color: #000; // temp!
+  grid-column: leftbar;
+  height: 100%;
 
-aside { grid-column: rightbar; }
+  @media (max-width: $tablet) {
+    grid-column: fullbleed;
+    grid-row: 1;
+  }
+}
+
+aside {
+  background-color: red; // temp!
+  grid-column: rightbar;
+  writing-mode: vertical-lr; // temp!
+
+  @media (max-width: $mobile) {
+    display: none;
+  }
+}
