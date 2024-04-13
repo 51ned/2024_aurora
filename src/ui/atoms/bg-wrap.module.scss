@@ -1,7 +1,0 @@
-.wrap {
-  display: grid;
-  grid-column: fullbleed;
-  grid-template-columns: subgrid;
-
-  & > * { grid-column: data; }
-}

@@ -1,1 +1,1 @@
-export * from './bg-wrap'
+export * from './switcher'

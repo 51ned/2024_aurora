@@ -1,0 +1,7 @@
+$body-bg: #fff;
+$font-color: #000;
+
+@media(prefers-color-scheme: dark) {
+  $body-bg: #000;
+  $font-color: #fff;
+}
