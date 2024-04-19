@@ -1,2 +1,2 @@
 export * from './gtm'
-export * from './scheme'
+export * from './set-scheme'

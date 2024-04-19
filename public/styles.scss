@@ -8,9 +8,8 @@ html {
   touch-action: manipulation;
 }
 
+// layout
 body {
-  background-color: $body-bg;
-  color: $font-color;
   display: grid;
   grid-template-columns: 
     [fullbleed-start] minmax($base-indent, 1fr)
@@ -26,6 +25,7 @@ body {
   margin-block: 0;
   margin-inline: 0;
   min-height: 100lvh;
+  @extend %bg-reg;
 
   @media (max-width: $tablet) {
     grid-template-columns: 

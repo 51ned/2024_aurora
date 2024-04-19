@@ -1,7 +1,39 @@
-$body-bg: #fff;
-$font-color: #000;
+$colors: (
+  bg-reg: #fff,
+  fnt-reg: #000
+);
 
-@media(prefers-color-scheme: dark) {
-  $body-bg: #000;
-  $font-color: #fff;
+$colors-dark: (
+  bg-reg: #000,
+  fnt-reg: #fff
+);
+
+:root {
+  @each $name, $color in $colors {
+    --clr-#{$name}: #{$color};
+  }
+
+  @media (prefers-color-scheme: dark) {
+    @each $name, $color in $colors-dark {
+      --clr-#{$name}: #{$color};
+    }
+  }
+};
+
+@function getColor($clr-name) {
+  @return var(--clr-#{$clr-name})
+};
+
+@mixin color-transition($prop) {
+  transition: $prop .2s ease;
+};
+
+%bg-reg {
+  background-color: getColor(bg-reg);
+  @include color-transition(background-color)
+};
+
+%fnt-reg {
+  color: getColor(fnt-reg);
+  @include color-transition(color)
 }
