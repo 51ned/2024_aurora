@@ -1,1 +1,1 @@
-export * from './switcher'
+export * from './toggle'

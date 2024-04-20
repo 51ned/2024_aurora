@@ -1,0 +1,39 @@
+.label {
+  border: 2px solid #fff;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  height: 32px;
+  outline: none;
+  width: 56px;
+
+  &:focus-visible {}
+}
+
+.input {
+  cursor: pointer;
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+
+  &::after {
+    align-self: center;
+    background-color: #fff;
+    content: '';
+    grid-column: 1;
+    height: 24px;
+    transform: translateX(2px);
+    transition: transform .2s;
+    width: 24px;
+  }
+
+  &:checked::after {
+    transform: translateX(calc(100% + 2px));
+    transition: transform .2s;
+  }
+}
+
+.span {
+  &:first-of-type { grid-column: 1; }
+  &:last-of-type { grid-column: 2; }
+}

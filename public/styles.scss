@@ -1,15 +1,33 @@
 @import './styles/breakpoints';
 @import './styles/colors';
+@import './styles/common';
 @import './styles/geometry';
 
+
+// base
+* { box-sizing: border-box; }
+
+a { text-decoration: none; }
+
+fieldset {
+  border: none;
+  padding: 0;
+}
 
 html {
   scroll-behavior: smooth;
   touch-action: manipulation;
 }
 
+input[type='checkbox'] {
+  appearance: none;
+  margin: 0;
+}
+
+
 // layout
 body {
+  @extend %bg-reg;
   display: grid;
   grid-template-columns: 
     [fullbleed-start] minmax($base-indent, 1fr)
@@ -22,10 +40,8 @@ body {
     [header-row] min-content
     [main-row] 1fr
     [footer-row] min-content;  
-  margin-block: 0;
-  margin-inline: 0;
+  margin: 0;
   min-height: 100lvh;
-  @extend %bg-reg;
 
   @media (max-width: $tablet) {
     grid-template-columns: 
@@ -69,8 +85,15 @@ nav {
 
 aside {
   grid-column: rightbar;
+  @media (max-width: $mobile) { display: none; }
+}
 
-  @media (max-width: $mobile) {
-    display: none;
-  }
+%sr-only {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
