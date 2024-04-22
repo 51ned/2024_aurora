@@ -8,45 +8,62 @@ type InputLabelProps = {
 
 
 interface ToggleProps {
+  inputID: string,
   inputLabels: InputLabelProps[],
+  isChecked?: boolean,
   legendID: string,
-  legendText: string,
-  onChangeHandle: (e: {target: {value: string}}) => void
+  legendText: string
+  onChangeHandle: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 
 export function Toggle({
+  inputID,
   inputLabels,
+  isChecked,
   legendID,
   legendText,
-  onChangeHandle
+  onChangeHandle,
 }: ToggleProps) {
+  let inputCheckedOpt: {[key: string]: boolean} = {}
+
+  isChecked !== undefined
+    && (inputCheckedOpt['checked'] = isChecked)
+
+  let otherLabelOpts: {[key: string]: boolean | string | undefined} = {}
+
+  inputLabels.some(l => l.children !== undefined && l.children !== null)
+    && (otherLabelOpts['role'] = 'img')
+
   return (
     <fieldset>
       <legend className='sr-only' id={legendID}>
         { legendText }
       </legend>
 
-      <label className={s.label}>
+      <div className={s.wrap}>
         <input
           aria-labelledby={legendID}
           className={s.input}
+          id={inputID}
           onChange={onChangeHandle}
           role='switch'
           type='checkbox'
+          checked={isChecked}
         />
 
         {inputLabels.map((label, index) => (
-          <span
+          <label
             aria-label={label.labelText}
             className={s.span}
+            htmlFor={inputID}
             key={index}
-            role={label.children ? 'img' : ''}
+            {...otherLabelOpts}
           >
             { label.children && label.children }
-          </span>
+          </label>
         ))}
-      </label>
+      </div>
     </fieldset>
   )
 }

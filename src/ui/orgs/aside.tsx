@@ -2,13 +2,17 @@
 
 import { Toggle } from "ui/atoms"
 
+import { useColorScheme } from 'hooks/.'
+
 import s from './aside.module.scss'
 
 
-const schemeChangeHandle = (e: {target: {value: string}}) => {
-  document.documentElement.setAttribute('data-color-scheme', e.target.value)
-}
 
+function schemeChangeHandle(e: React.ChangeEvent<HTMLInputElement>) {
+  e.target.checked
+    ? document.body.setAttribute('data-color-scheme', 'dark')
+    : document.body.setAttribute('data-color-scheme', 'light')
+}
 
 const switcherLabelsData = [
   {
@@ -24,10 +28,13 @@ export function Aside() {
   return (
     <aside className={s.wrap}>
       <Toggle
+        inputID='color-scheme-input'
         inputLabels={switcherLabelsData}
+        isChecked={useColorScheme()}
         legendID='color-scheme-switcher'
-        legendText='Выбор темы оформления:'
-        onChangeHandle={schemeChangeHandle} />
+        legendText='Тема оформления'
+        onChangeHandle={schemeChangeHandle}
+      />
     </aside>
   )
 }

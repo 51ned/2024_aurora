@@ -13,7 +13,7 @@ $colors-dark: (
     --clr-#{$name}: #{$color};
   }
 
-  @media (prefers-color-scheme: dark) {
+  &:has(body[data-color-scheme="dark"]) {
     @each $name, $color in $colors-dark {
       --clr-#{$name}: #{$color};
     }
