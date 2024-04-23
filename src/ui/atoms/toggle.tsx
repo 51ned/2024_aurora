@@ -8,9 +8,9 @@ type InputLabelProps = {
 
 
 interface ToggleProps {
+  checkedAttrHande?: () => boolean,
   inputID: string,
   inputLabels: InputLabelProps[],
-  isChecked?: boolean,
   legendID: string,
   legendText: string
   onChangeHandle: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -18,19 +18,16 @@ interface ToggleProps {
 
 
 export function Toggle({
+  checkedAttrHande,
   inputID,
   inputLabels,
-  isChecked,
   legendID,
   legendText,
   onChangeHandle,
 }: ToggleProps) {
-  let inputCheckedOpt: {[key: string]: boolean} = {}
-
-  isChecked !== undefined
-    && (inputCheckedOpt['checked'] = isChecked)
-
-  let otherLabelOpts: {[key: string]: boolean | string | undefined} = {}
+  const isChecked = checkedAttrHande ? checkedAttrHande() : false
+  
+  let otherLabelOpts: {[key: string]: string} = {}
 
   inputLabels.some(l => l.children !== undefined && l.children !== null)
     && (otherLabelOpts['role'] = 'img')
@@ -44,12 +41,12 @@ export function Toggle({
       <div className={s.wrap}>
         <input
           aria-labelledby={legendID}
+          checked={isChecked}
           className={s.input}
           id={inputID}
           onChange={onChangeHandle}
           role='switch'
           type='checkbox'
-          checked={isChecked}
         />
 
         {inputLabels.map((label, index) => (
