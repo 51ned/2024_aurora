@@ -1,11 +1,11 @@
 import { Suspense } from 'react'
 
-import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
+import type { Metadata } from 'next'
 
 import { Aside, Footer, Header, Nav } from 'ui/orgs/.'
 
-import { GTM, setColorScheme } from 'utils/.'
+import { GTM } from 'utils/.'
 
 import 'public/styles.scss'
 
@@ -24,12 +24,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-
-  // setColorScheme()
-
   return (
     <html dir='ltr' lang='ru'>
-      
       <body className={montserrart.className}>
         <Header />
         <Nav />
