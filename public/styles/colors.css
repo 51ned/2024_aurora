@@ -9,8 +9,10 @@ body {
   background-color: var(--base-clr);
   color: var(--base-clr-inv);
   transition: background-color, color, .2s;
+}
 
-  :has(input[name='color-theme-toggle']:checked) {
+@media(prefers-color-scheme: light) {
+  body:has(input[name='color-theme-toggle']:checked) {
     color-scheme: dark;
   }
 }
