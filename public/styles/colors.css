@@ -1,4 +1,7 @@
 :root {
+  --base-clr: #fff;
+  --base-clr-inv: #000;
+
   @media(prefers-color-scheme: dark) {
     --base-clr: #000;
     --base-clr-inv: #fff;
@@ -10,8 +13,7 @@
   }
 
   @media(prefers-color-scheme: light) {
-    --base-clr: #fff;
-    --base-clr-inv: #000;
+    
 
     /* :has(input[name='color-theme-toggle-input']:checked) {
       --base-clr: #000;
