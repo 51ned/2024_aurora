@@ -3,20 +3,20 @@
     --base-clr: #000;
     --base-clr-inv: #fff;
 
-    :has(input[name='color-theme-toggle-input']:not(:checked)) {
+    /* :has(input[name='color-theme-toggle-input']:not(:checked)) {
       --base-clr: #fff;
       --base-clr-inv: #000;
-    }
+    } */
   }
 
   @media(prefers-color-scheme: light) {
     --base-clr: #fff;
     --base-clr-inv: #000;
 
-    :has(input[name='color-theme-toggle-input']:checked) {
+    /* :has(input[name='color-theme-toggle-input']:checked) {
       --base-clr: #000;
       --base-clr-inv: #fff;
-    }
+    } */
   }
 }
 
