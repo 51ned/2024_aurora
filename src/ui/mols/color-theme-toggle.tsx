@@ -30,7 +30,7 @@ export function ColorThemeToggle() {
       inputLabels={labelsData}
       isChecked={isCheckedHandle}
       legendText='Тема оформления'
-      nameText='color-theme-toggle-input'
+      nameText='color-theme-toggle'
       onChangeHandle={onChangeHandle}
     />
   )

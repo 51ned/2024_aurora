@@ -1,29 +1,23 @@
 :root {
-  --base-clr: #fff;
-  --base-clr-inv: #000;
-
-  @media(prefers-color-scheme: dark) {
-    --base-clr: #000;
-    --base-clr-inv: #fff;
-
-    /* :has(input[name='color-theme-toggle-input']:not(:checked)) {
-      --base-clr: #fff;
-      --base-clr-inv: #000;
-    } */
-  }
-
-  @media(prefers-color-scheme: light) {
-    
-
-    /* :has(input[name='color-theme-toggle-input']:checked) {
-      --base-clr: #000;
-      --base-clr-inv: #fff;
-    } */
-  }
+  color-scheme: light dark;
+  
+  --base-clr: light-dark(#fff, #000);
+  --base-clr-inv: light-dark(#000, #fff);
 }
 
 body {
   background-color: var(--base-clr);
   color: var(--base-clr-inv);
   transition: background-color, color, .2s;
+
+  :has(input[name='color-theme-toggle']:checked) {
+    color-scheme: dark;
+  }
+}
+
+@media(prefers-color-scheme: dark) {
+  /* Flicker lives here... Why? */
+  body:has(input[name='color-theme-toggle']:not(:checked)) {
+    color-scheme: light;
+  }
 }

@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description: ''
 }
 
-// export const viewport: Viewport = {
-//   colorScheme:'light dark',
-//   themeColor: [
-//     { media: '(prefers-color-scheme: light)', color: 'white' },
-//     { media: '(prefers-color-scheme: dark)', color: 'black' },
-//   ]
-// }
+export const viewport: Viewport = {
+  colorScheme:'light dark',
+  // themeColor: [
+  //   { media: '(prefers-color-scheme: light)', color: 'white' },
+  //   { media: '(prefers-color-scheme: dark)', color: 'black' },
+  // ]
+}
 
 
 const montserrart = Montserrat({ subsets: ['cyrillic'] })
