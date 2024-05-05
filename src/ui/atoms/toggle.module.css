@@ -1,13 +1,11 @@
 .wrap {
-  border: 2px solid #fff;
+  border: 2px solid var(--base-clr-inv);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
   height: 32px;
   outline: none;
   width: 56px;
-
-  &:focus-visible {}
 }
 
 .input {
@@ -18,7 +16,7 @@
 
   &::after {
     align-self: center;
-    background-color: #fff;
+    background-color: var(--base-clr-inv);
     content: '';
     grid-column: 1;
     height: 24px;
@@ -33,7 +31,7 @@
   }
 }
 
-.span {
+.label {
   &:first-of-type { grid-column: 1; }
   &:last-of-type { grid-column: 2; }
 }
