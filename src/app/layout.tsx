@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 
+import { headers } from 'next/headers'
 import { Montserrat } from 'next/font/google'
 import type { Metadata, Viewport } from 'next'
 
@@ -31,11 +32,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const theme = headers().get('x-theme')
+
   return (
     <html dir='ltr' lang='ru'>
       <body className={montserrart.className}>
         <Header />
-
+        { theme }
         { children }
 
         <Nav />
