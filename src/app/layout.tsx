@@ -27,18 +27,18 @@ export const viewport: Viewport = {
 const montserrart = Montserrat({ subsets: ['cyrillic'] })
 
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const theme = headers().get('x-theme')
+  const theme = headers().get('sec-ch-prefers-color-scheme')
 
   return (
     <html dir='ltr' lang='ru'>
       <body className={montserrart.className}>
         <Header />
-        { theme }
+        <p>Theme from http-header: {theme ?? 'nope'}</p>
         { children }
 
         <Nav />
