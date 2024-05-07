@@ -50,7 +50,7 @@ export function Toggle({
     otherInputAttrs['checked'] = isChecked
     otherInputAttrs['onChange'] = onChangeHandle
   } else {
-    otherInputAttrs['defaultChecked']
+    otherInputAttrs['defaultChecked'] = isChecked
   }
   
   if (nameText) {

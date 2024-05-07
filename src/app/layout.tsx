@@ -5,6 +5,7 @@ import { Montserrat } from 'next/font/google'
 import type { Metadata, Viewport } from 'next'
 
 import { Aside, Footer, Header, Nav } from 'ui/orgs'
+import { ColorThemeToggle } from 'ui/mols'
 import { GTM } from 'utils/.'
 
 import 'public/styles.css'
@@ -24,7 +25,7 @@ export const viewport: Viewport = {
 }
 
 
-const montserrart = Montserrat({ subsets: ['cyrillic'] })
+const font = Montserrat({ subsets: ['cyrillic'] })
 
 
 export default function RootLayout({
@@ -32,17 +33,22 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const theme = headers().get('sec-ch-prefers-color-scheme')
+  const res = headers()
+  const headerTheme = res.get('sec-ch-prefers-color-scheme')
 
   return (
     <html dir='ltr' lang='ru'>
-      <body className={montserrart.className}>
+      <body className={font.className}>
         <Header />
-        <p>Theme from http-header: {theme ?? 'nope'}</p>
+
         { children }
 
         <Nav />
-        <Aside />
+
+        <Aside>
+          <ColorThemeToggle theme={headerTheme} />
+        </Aside>
+
         <Footer />
         
         <Suspense>

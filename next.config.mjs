@@ -1,4 +1,22 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+/** @type { import('next').NextConfig } */
 
-export default nextConfig;
+
+const nextConfig = {
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Accept-CH',
+            value: 'Sec-CH-Prefers-Color-Scheme'
+          }
+        ]
+      }
+    ]
+  },
+  reactStrictMode: false
+}
+
+
+export default nextConfig

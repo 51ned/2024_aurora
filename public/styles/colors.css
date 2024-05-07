@@ -11,15 +11,10 @@ body {
   transition: background-color, color, .2s;
 }
 
-@media(prefers-color-scheme: light) {
-  body:has(input[name='color-theme-toggle']:checked) {
-    color-scheme: dark;
-  }
+body:has(input[name='color-theme-toggle']:checked) {
+  color-scheme: dark;
 }
 
-@media(prefers-color-scheme: dark) {
-  /* Flicker lives here... Why? */
-  body:has(input[name='color-theme-toggle']:not(:checked)) {
-    color-scheme: light;
-  }
+body:has(input[name='color-theme-toggle']:not(:checked)) {
+  color-scheme: light;
 }

@@ -1,12 +1,14 @@
-import { ColorThemeToggle } from 'ui/mols'
-
 import s from './aside.module.css'
 
 
-export function Aside() {
+export function Aside({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <aside className={s.wrap}>
-      <ColorThemeToggle />
+      { children }
     </aside>
   )
 }

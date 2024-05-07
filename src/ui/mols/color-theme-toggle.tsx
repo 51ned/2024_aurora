@@ -1,9 +1,6 @@
-'use client'
-
-
-import { useEffect, useState } from 'react'
-
 import { Toggle } from 'ui/atoms'
+
+import { getTheme } from 'utils/.'
 
 
 const labelsData = [
@@ -12,30 +9,15 @@ const labelsData = [
 ]
 
 
-export function ColorThemeToggle() {   
-  const [isChecked, setChecked] = useState(false)
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        setChecked(true)
-      }
-    }
-  }, [])
-  
-  const isCheckedHandle = isChecked
-
-  const onChangeHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(!isChecked)
-  }
-
+export async function ColorThemeToggle({ theme }: { theme: string | null }) {
+  const isChecked = await getTheme() === 'dark'
+  console.log(isChecked)
   return (
     <Toggle
       inputLabels={labelsData}
-      isChecked={isCheckedHandle}
+      isChecked={isChecked}
       legendText='Тема оформления'
       nameText='color-theme-toggle'
-      onChangeHandle={onChangeHandle}
     />
   )
 }
