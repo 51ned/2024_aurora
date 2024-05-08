@@ -7,8 +7,13 @@ export function Aside({
   children: React.ReactNode
 }) {
   return (
-    <aside className={s.wrap}>
-      { children }
+    <aside>
+      <div className={s.wrap}>
+        { children }
+
+        <div className={s.plug1} />
+        <div className={s.plug2} />
+      </div>
     </aside>
   )
 }
