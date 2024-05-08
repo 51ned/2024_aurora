@@ -1,12 +1,11 @@
 import { Suspense } from 'react'
 
-import { headers } from 'next/headers'
 import { Montserrat } from 'next/font/google'
 import type { Metadata, Viewport } from 'next'
 
 import { Aside, Footer, Header, Nav } from 'ui/orgs'
 import { ColorThemeToggle } from 'ui/mols'
-import { GTM } from 'utils/.'
+import { getFromCookies, getFromHeaders, GTM } from 'utils/.'
 
 import 'public/styles.css'
 
@@ -28,13 +27,16 @@ export const viewport: Viewport = {
 const font = Montserrat({ subsets: ['cyrillic'] })
 
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const res = headers()
-  const headerTheme = res.get('sec-ch-prefers-color-scheme')
+  let theme: null | string | undefined = await getFromCookies()
+
+  if (!theme) {
+    theme = await getFromHeaders()
+  }
 
   return (
     <html dir='ltr' lang='ru'>
@@ -46,7 +48,7 @@ export default function RootLayout({
         <Nav />
 
         <Aside>
-          <ColorThemeToggle theme={headerTheme} />
+          <ColorThemeToggle theme={theme} />
         </Aside>
 
         <Footer />
