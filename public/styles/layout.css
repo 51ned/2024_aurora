@@ -12,7 +12,7 @@
 
 body {
   display: grid;
-  gap: 0 var(--l-indent);
+  /* gap: 0 var(--l-indent); */
   grid-template-columns: 
     [fullbleed-start] minmax(var(--base-indent), 1fr)
     [leftbar-start] repeat(2, var(--layout-pref-col-width))

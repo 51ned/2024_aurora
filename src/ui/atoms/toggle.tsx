@@ -1,8 +1,3 @@
-import { useId } from 'react'
-
-import s from './toggle.module.css'
-
-
 /**
  * Toggle component represents a customizable toggle switch with labels.
  * Component can be controlled or uncontrolled (based on onChangeHandle in props presence).
@@ -17,13 +12,19 @@ import s from './toggle.module.css'
  */
 
 
-type InputLabelProps = {
-  children?: React.ReactNode,
-  labelText: string
+import { useId } from 'react'
+import cn from 'classnames'
+
+import s from './toggle.module.css'
+
+
+type labelsDataProps = {
+  icon?: string,
+  text: string[]
 }
 
 interface ToggleProps {
-  inputLabels: InputLabelProps[],
+  labelsData: labelsDataProps,
   isChecked?: boolean | void,
   legendText: string,
   nameText?: string
@@ -32,7 +33,7 @@ interface ToggleProps {
 
 
 export function Toggle({
-  inputLabels,
+  labelsData,
   isChecked,
   legendText,
   nameText,
@@ -60,8 +61,17 @@ export function Toggle({
   // Dynamic addition of 'label' tag attrs:
   let otherLabelAttrs: {[key: string]: string} = {}
 
-  if (inputLabels.some(l => l.children)) {
+  if (labelsData.icon) {
     otherLabelAttrs['role'] = 'img'
+  }
+
+  // Dynamic addition of 'label' styles (if they were passed):
+  let labelStyle = `${s.label}`
+
+  if (labelsData.icon) {
+    labelStyle = cn(s.label, {
+      [s[labelsData.icon]]: labelsData.icon
+    })
   }
 
   return (
@@ -70,7 +80,7 @@ export function Toggle({
         { legendText }
       </legend>
 
-      <div className={s.wrap}>
+      <label className={s.wrap}>
         <input
           aria-labelledby={legendId}
           className={s.input}
@@ -80,18 +90,16 @@ export function Toggle({
           {...otherInputAttrs}
         />
 
-        {inputLabels.map((label, index) => (
-          <label
-            aria-label={label.labelText}
-            className={s.label}
-            htmlFor={inputId}
+        {labelsData.text.map((txt, index) => (
+          <span
+            aria-label={txt}
+            className={labelStyle}
+            // htmlFor={inputId}
             key={index}
             {...otherLabelAttrs}
-          >
-            { label.children && label.children }
-          </label>
+          />
         ))}
-      </div>
+      </label>
     </fieldset>
   )
 }

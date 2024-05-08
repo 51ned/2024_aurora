@@ -4,8 +4,8 @@ import { Montserrat } from 'next/font/google'
 import type { Metadata, Viewport } from 'next'
 
 import { Aside, Footer, Header, Nav } from 'ui/orgs'
-import { ColorThemeToggle } from 'ui/mols'
-import { getFromCookies, getFromHeaders, GTM } from 'utils/.'
+import { ThemeToggle, GTM } from 'ui/mols'
+import { getFromCookies, getFromHeaders } from 'utils/theme-handles'
 
 import 'public/styles.css'
 
@@ -48,7 +48,7 @@ export default async function RootLayout({
         <Nav />
 
         <Aside>
-          <ColorThemeToggle theme={theme} />
+          <ThemeToggle theme={theme} />
         </Aside>
 
         <Footer />

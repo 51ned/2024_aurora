@@ -1,8 +1,11 @@
 :root {
   color-scheme: light dark;
+
+  --base-dark-clr: #000;
+  --base-light-clr: #fff;
   
-  --base-clr: light-dark(#fff, #000);
-  --base-clr-inv: light-dark(#000, #fff);
+  --base-clr: light-dark(var(--base-light-clr), var(--base-dark-clr));
+  --base-clr-inv: light-dark(var(--base-dark-clr), var(--base-light-clr));
 }
 
 body {
@@ -11,10 +14,10 @@ body {
   transition: background-color, color, .2s;
 }
 
-body:has(input[name='color-theme-toggle']:checked) {
+body:has(input[name='theme-toggle']:checked) {
   color-scheme: dark;
 }
 
-body:has(input[name='color-theme-toggle']:not(:checked)) {
+body:has(input[name='theme-toggle']:not(:checked)) {
   color-scheme: light;
 }

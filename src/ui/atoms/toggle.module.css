@@ -1,24 +1,26 @@
 .wrap {
   border: 2px solid var(--base-clr-inv);
+  cursor: pointer;
   display: grid;
+  grid-gap: 2px;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
   height: 32px;
   outline: none;
-  width: 56px;
+  place-items: center;
+  width: 58px;
 }
 
 .input {
-  cursor: pointer;
   display: grid;
   grid-column: 1 / -1;
+  grid-row: 1;
   grid-template-columns: subgrid;
+  z-index: -1;
 
   &::after {
-    align-self: center;
     background-color: var(--base-clr-inv);
     content: '';
-    grid-column: 1;
     height: 24px;
     transform: translateX(2px);
     transition: transform .2s;
@@ -26,7 +28,7 @@
   }
 
   &:checked::after {
-    transform: translateX(calc(100% + 2px));
+    transform: translateX(calc(100% + 4px));
     transition: transform .2s;
   }
 }
@@ -34,4 +36,24 @@
 .label {
   &:first-of-type { grid-column: 1; }
   &:last-of-type { grid-column: 2; }
+}
+
+.theme-icon {
+  place-self: center;
+  border-radius: 8px;
+  grid-row: 1;
+  height: 16px;
+  width: 16px;
+  
+  &:first-of-type {
+    background-color: var(--base-light-clr);
+    grid-column: 1;
+    margin-left: 3px;
+  }
+
+  &:last-of-type {
+    background-color: var(--base-dark-clr);
+    grid-column: 2;
+    margin-right: 3px;
+  }
 }
