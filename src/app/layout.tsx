@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import { Montserrat } from 'next/font/google'
 import type { Metadata, Viewport } from 'next'
 
-import { Aside, Footer, Header, Nav } from 'ui/orgs'
+import { Aside, Footer, Nav } from 'ui/orgs'
 import { ThemeToggle, GTM } from 'ui/mols'
 import { getFromCookies, getFromHeaders } from 'utils/theme-handles'
 
@@ -41,8 +41,6 @@ export default async function RootLayout({
   return (
     <html dir='ltr' lang='ru'>
       <body className={font.className}>
-        <Header />
-
         { children }
 
         <Nav />

@@ -12,7 +12,7 @@
 
 body {
   display: grid;
-  /* gap: 0 var(--l-indent); */
+  gap: 0 var(--l-indent);
   grid-template-columns: 
     [fullbleed-start] minmax(var(--base-indent), 1fr)
     [leftbar-start] repeat(2, var(--layout-pref-col-width))
@@ -23,9 +23,10 @@ body {
     [nav] min-content
     [header] min-content
     [main] 1fr
-    [footer] min-content;  
+    [footer] min-content
+    [aside] min-content;
   margin: 0;
-  min-height: 100lvh;
+  min-height: 100vh;
 
   @media (max-width: 1280px) {
     grid-template-columns: 
@@ -55,15 +56,20 @@ main { grid-row: main; }
 
 footer { grid-row: footer; }
 
-nav, aside { grid-row: header / footer; }
+nav, aside {
+  grid-row: header / footer;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
 
 nav {
   grid-column: leftbar;
-  height: 100%;
 
   @media (max-width: 1280px) {
     grid-column: fullbleed;
     grid-row: nav;
+    height: auto;
   }
 }
 
@@ -71,6 +77,9 @@ aside {
   grid-column: rightbar;
 
   @media (max-width: 960px) {
-    display: none;
+    bottom: 0;
+    grid-column: fullbleed;
+    grid-row: aside;
+    height: auto;
   }
 }
