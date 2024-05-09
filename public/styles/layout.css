@@ -27,7 +27,7 @@ body {
   @media (max-width: 960px) {
     grid-template-columns: 
       [fullbleed-start] 0
-      [content-start] 12fr
+      [content-start] 1fr
       [content-end] 0 [fullbleed-end];
   }
 }
@@ -67,5 +67,6 @@ aside {
     grid-column: fullbleed;
     grid-row: aside;
     height: auto;
+    top: unset;
   }
 }
