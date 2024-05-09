@@ -1,5 +1,4 @@
 body {
-  background-color: red;
   display: grid;
   grid-template-columns: 
     [fullbleed-start] 0
@@ -17,15 +16,15 @@ body {
   max-width: 1920px;
   min-height: 100vh;
 
-  /* @media (max-width: 1280px) {
+  @media (max-width: 1280px) {
     grid-template-columns: 
       [fullbleed-start] 0
       [content-start] 12fr
       [content-end rightbar-start] 1fr
       [rightbar-end] 0 [fullbleed-end];
-  } */
+  }
 
-  @media (max-width: 1229px) {
+  @media (max-width: 960px) {
     grid-template-columns: 
       [fullbleed-start] 0
       [content-start] 1fr
