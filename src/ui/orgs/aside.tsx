@@ -10,9 +10,6 @@ export function Aside({
     <aside>
       <div className={s.wrap}>
         { children }
-
-        <div className={s.plug1} />
-        <div className={s.plug2} />
       </div>
     </aside>
   )
