@@ -1,5 +1,5 @@
 .wrap {
-  border: 2px solid var(--base-clr-inv);
+  border: 2px solid var(--clr-base-inv);
   cursor: pointer;
   display: grid;
   grid-gap: 2px;
@@ -19,7 +19,7 @@
   z-index: -1;
 
   &::after {
-    background-color: var(--base-clr-inv);
+    background-color: var(--clr-base-inv);
     content: '';
     height: 24px;
     transform: translateX(2px);
@@ -46,13 +46,13 @@
   width: 16px;
   
   &:first-of-type {
-    background-color: var(--base-light-clr);
+    background-color: var(--clr-light);
     grid-column: 1;
     margin-left: 3px;
   }
 
   &:last-of-type {
-    background-color: var(--base-dark-clr);
+    background-color: var(--clr-dark);
     grid-column: 2;
     margin-right: 3px;
   }

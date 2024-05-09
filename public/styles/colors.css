@@ -1,16 +1,16 @@
 :root {
   color-scheme: light dark;
 
-  --base-dark-clr: #000;
-  --base-light-clr: #fff;
-  
-  --base-clr: light-dark(var(--base-light-clr), var(--base-dark-clr));
-  --base-clr-inv: light-dark(var(--base-dark-clr), var(--base-light-clr));
+  --clr-light: #fff;
+  --clr-dark: #000;
+
+  --clr-base: light-dark(var(--clr-light), var(--clr-dark));
+  --clr-base-inv: light-dark(var(--clr-dark), var(--clr-light));
 }
 
 body {
-  background-color: var(--base-clr);
-  color: var(--base-clr-inv);
+  background-color: var(--clr-base);
+  color: var(--clr-base-inv);
   transition: background-color, color, .2s;
 }
 

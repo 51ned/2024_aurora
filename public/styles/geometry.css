@@ -1,6 +1,1 @@
-:root {
-  --base: clamp(2px, .3vw, 4px);
-  --base-indent: clamp(12px, 2.5vw, 48px);
 
-  --l-indent: calc(var(--base-indent) / 2);
-}
