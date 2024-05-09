@@ -20,11 +20,6 @@
 /* temp */
 .plug1, .plug2 {
   background-color: var(--base-clr-inv);
-  height: 58px;
-  width: 58px;
-
-  @media (max-width: 960px) {
-    height: 32px;
-    width: 32px;
-  }
+  height: calc(var(--base) * 12);
+  width: calc(var(--base) * 12);
 }

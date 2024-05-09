@@ -1,24 +1,12 @@
-:root {
-  --layout-max-width: 1920px;
-  --layout-min-width: 360px;
-  
-  --layout-cols-num: 15;
-  
-  --layout-max-col-width: calc(var(--layout-max-width) / var(--layout-cols-num));
-  --layout-min-col-width: calc(var(--layout-min-width) / var(--layout-cols-num));
-  
-  --layout-pref-col-width: minmax(var(--layout-min-col-width), var(--layout-max-col-width));
-}
-
 body {
   display: grid;
-  gap: 0 var(--l-indent);
+  gap: var(--base-indent);
   grid-template-columns: 
-    [fullbleed-start] minmax(var(--base-indent), 1fr)
-    [leftbar-start] repeat(2, var(--layout-pref-col-width))
-    [leftbar-end content-start] repeat(12, var(--layout-pref-col-width))
-    [content-end rightbar-start] var(--layout-pref-col-width)
-    [rightbar-end] minmax(var(--base-indent), 1fr) [fullbleed-end];
+    [fullbleed-start] 0
+    [leftbar-start] repeat(2, 1fr)
+    [leftbar-end content-start] repeat(12, 1fr)
+    [content-end rightbar-start] 1fr
+    [rightbar-end] 0 [fullbleed-end];
   grid-template-rows:
     [nav] min-content
     [header] min-content
@@ -26,20 +14,21 @@ body {
     [footer] min-content
     [aside] min-content;
   margin: 0;
+  max-width: 1920px;
   min-height: 100vh;
 
   @media (max-width: 1280px) {
     grid-template-columns: 
       [fullbleed-start] 0
-      [content-start] repeat(12, var(--layout-pref-col-width))
-      [content-end rightbar-start] var(--layout-pref-col-width)
+      [content-start] repeat(12, 1fr)
+      [content-end rightbar-start] 1fr
       [rightbar-end] 0 [fullbleed-end];
   }
 
   @media (max-width: 960px) {
     grid-template-columns: 
       [fullbleed-start] var(--base-indent)
-      [content-start] repeat(12, var(--layout-pref-col-width))
+      [content-start] repeat(12, 1fr)
       [content-end] var(--base-indent) [fullbleed-end];
   }
 }
@@ -51,9 +40,7 @@ header, main, footer {
 }
 
 header { grid-row: header; }
-
 main { grid-row: main; }
-
 footer { grid-row: footer; }
 
 nav, aside {

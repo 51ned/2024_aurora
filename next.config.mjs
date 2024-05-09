@@ -8,8 +8,8 @@ const nextConfig = {
         source: '/:path*',
         headers: [
           {
-            key: 'Accept-CH',
-            value: 'Sec-CH-Prefers-Color-Scheme'
+            key: 'accept-ch',
+            value: 'sec-ch-prefers-color-scheme'
           }
         ]
       }
