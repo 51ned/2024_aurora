@@ -46,8 +46,7 @@ export default async function RootLayout({
         <Nav />
 
         <Aside>
-          asd
-          {/* <ThemeToggle theme={theme} /> */}
+          <ThemeToggle theme={theme} />
         </Aside>
 
         <Footer />

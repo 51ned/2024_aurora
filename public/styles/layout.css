@@ -1,4 +1,5 @@
 body {
+  background-color: red;
   display: grid;
   grid-template-columns: 
     [fullbleed-start] 0
