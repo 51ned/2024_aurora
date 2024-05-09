@@ -1,10 +1,9 @@
 body {
   display: grid;
-  /* gap: var(--base-indent); */
   grid-template-columns: 
     [fullbleed-start] 0
-    [leftbar-start] repeat(2, 1fr)
-    [leftbar-end content-start] repeat(12, 1fr)
+    [leftbar-start] 2fr
+    [leftbar-end content-start] 12fr
     [content-end rightbar-start] 1fr
     [rightbar-end] 0 [fullbleed-end];
   grid-template-rows:
@@ -20,16 +19,16 @@ body {
   @media (max-width: 1280px) {
     grid-template-columns: 
       [fullbleed-start] 0
-      [content-start] repeat(12, 1fr)
+      [content-start] 12fr
       [content-end rightbar-start] 1fr
       [rightbar-end] 0 [fullbleed-end];
   }
 
   @media (max-width: 960px) {
     grid-template-columns: 
-      [fullbleed-start] var(--base-indent)
-      [content-start] repeat(12, 1fr)
-      [content-end] var(--base-indent) [fullbleed-end];
+      [fullbleed-start] 0
+      [content-start] 12fr
+      [content-end] 0 [fullbleed-end];
   }
 }
 
