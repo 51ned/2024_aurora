@@ -1,6 +1,6 @@
 body {
   display: grid;
-  gap: var(--base-indent);
+  /* gap: var(--base-indent); */
   grid-template-columns: 
     [fullbleed-start] 0
     [leftbar-start] repeat(2, 1fr)
