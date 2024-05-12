@@ -1,46 +1,40 @@
-/**
- * ColorThemeToggle component for toggling between light and dark themes.
- * 
- * @param {string | null} theme - The current theme ('light' or 'dark'), or null if not specified.
- * 
- * Theme is passed from 'src/app/layout.tsx' and retrieved from HTTP headers (if using a Chromium browser) or cookies (if they exist).
- * Inside the 'useEffect' hook, the theme, retrieved from the browser's 'Window' object is recorded to cookies for better performance.
- */
-
-
 'use client'
 
 
 import { useEffect, useState } from 'react'
 
 import { Toggle } from 'ui/atoms'
-import { getFromWindow, setToCookies } from 'utils/theme-handles/.'
-import { labelsData } from 'lib/components-data/theme-toggle'
+import { getFromWindow, setToCookies } from 'utils/theme-handles'
+import { inputsData } from 'lib/components-data/theme-toggle'
+
+import s from './theme-toggle.module.css'
 
 
 export function ThemeToggle({ theme }: { theme: string | null }) {
-  const [isChecked, setChecked] = useState(theme === 'dark')
+  const [currTheme, setCurrTheme] = useState(theme)
 
   useEffect(() => {
     if (!theme) {
       const windowTheme = getFromWindow()
 
-      setChecked(windowTheme === 'dark')
+      setCurrTheme(windowTheme)
       setToCookies(windowTheme)
     }
   }, [theme])
 
-  const onChangeHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(!isChecked)
+  const onInputChange = (value: string) => {
+    setCurrTheme(value)
   }
   
   return (
     <Toggle
-      labelsData={labelsData}
-      isChecked={isChecked}
+      customStyles={s.icon}
+      inputsData={inputsData}
+      inputSize={32}
       legendText='Тема оформления'
-      nameText='theme-toggle'
-      onChangeHandle={onChangeHandle}
+      onInputChange={onInputChange}
+      toggleDir='horisontal'
+      valueToCompare={currTheme}
     />
   )
 }

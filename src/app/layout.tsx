@@ -1,19 +1,14 @@
 import { Suspense } from 'react'
 
 import { Montserrat } from 'next/font/google'
-import type { Metadata, Viewport } from 'next'
+import type { Viewport } from 'next'
 
 import { Aside, Footer, Nav } from 'ui/orgs'
 import { ThemeToggle, GTM } from 'ui/mols'
 import { getFromCookies, getFromHeaders } from 'utils/theme-handles'
 
-import 'public/styles.css'
+import 'public/globals.css'
 
-
-export const metadata: Metadata = {
-  title: '',
-  description: ''
-}
 
 export const viewport: Viewport = {
   colorScheme:'light dark',
@@ -27,11 +22,7 @@ export const viewport: Viewport = {
 const font = Montserrat({ subsets: ['cyrillic'] })
 
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   let theme: null | string | undefined = await getFromCookies()
 
   if (!theme) {

@@ -1,6 +1,14 @@
-import { Box } from 'ui/atoms/box'
+import type { Metadata } from 'next'
+
+import { Box } from 'ui/atoms'
 
 import s from './page.module.css'
+
+
+export const metadata: Metadata = {
+  title: '',
+  description: ''
+}
 
 
 export default function Home() {

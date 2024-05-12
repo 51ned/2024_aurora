@@ -1,0 +1,41 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+a, a:hover, a:link, a:visited {
+  text-decoration: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+button, input, select, textarea {
+  appearance: none;
+  font-family: inherit;
+}
+
+fieldset {
+  padding: 0;
+}
+
+html{
+  text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}

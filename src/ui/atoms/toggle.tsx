@@ -1,105 +1,144 @@
 /**
- * Toggle component represents a customizable toggle switch with labels.
- * Component can be controlled or uncontrolled (based on onChangeHandle in props presence).
- * Labels can be text mark only (for a11y) or text mark & icon.
- * @param { object } props - Props object for Toggle component.
- * @param { InputLabelProps[] } props.inputLabels - An array of input label props.
- * @param { boolean } [props.isChecked] - Specifies whether the toggle switch is checked.
- * @param { string } props.legendText - The text for the legend of the fieldset.
- * @param { string } [props.nameText] - The name attribute value for the input element.
- * @param { (e: React.ChangeEvent<HTMLInputElement>) => void } [props.onChangeHandle] - Function to handle onChange event of the input element.
- * @returns { TSX.Element } - Returns the Toggle component TSX.
- */
+  * Reusable & full-customisable toggle component. I hate inline-styles too, but.
+  * Having been impressed by this video: https://www.youtube.com/watch?v=8LFbS78a4Rw, i choose radio buttons.
+  * But Makeev hardcoded the animation in CSS for the three-position, horisontal-oriented toggle only.
+  * Unlike that, I wanted to create a toggle that could have any number of positions and free orientation.
+  * As you can see, the animation of the 'div.status' relies on the index of the checked input and it size.
+  * Then, I think it makes sense to keep values like the size of 'div.status', border-radii and offsets inside.
+  * All other styling is placed in the CSS module and the global styles.
+  * 
+  @param { string } customStyles:
+  A string representing a className for customizing the appearance of the component.
+  This prop allows applying custom styles to the component from outside.
+  @param { inputProps[] } inputsData:
+  An array of objects representing data for each position in the toggle.
+  Each object contains properties ariaLabel, name, and value, used to create radio buttons.
+  @param { string } legendText:
+  A string representing the text used as the legend of the toggle.
+  The legend provides additional information about the toggle to users.
+  @param { (value: string) => void } onInputChange:
+  A callback function called when the selected position in the toggle changes.
+  It takes the new value as an argument.
+  @param { 'horisontal' | 'vertical' } toggleDir:
+  Determines the direction of the positions layout in the toggle.
+  Can be either 'horizontal' or 'vertical'.
+  @param { string | null } valueToCompare:
+  The value against which the values of the radio buttons are compared to determine the currently selected position in the toggle.
+  Can be null if none of the positions are selected.
+*/
 
 
-import { useId } from 'react'
+'use client'
+
+
+import { useEffect, useState } from 'react'
 import cn from 'classnames'
 
 import s from './toggle.module.css'
 
 
-type labelsDataProps = {
-  icon?: string,
-  text: string[]
+type inputProps = {
+  ariaLabel: string,
+  name: string,
+  value: string
 }
 
 interface ToggleProps {
-  labelsData: labelsDataProps,
-  isChecked?: boolean | void,
+  customStyles?: string;
+  inputsData: inputProps[],
+  inputSize: number,
   legendText: string,
-  nameText?: string
-  onChangeHandle?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onInputChange: (value: string) => void,
+  toggleDir: 'horisontal' | 'vertical',
+  valueToCompare: string | null
 }
 
 
 export function Toggle({
-  labelsData,
-  isChecked,
+  customStyles,
+  inputsData,
+  inputSize,
+  toggleDir,
   legendText,
-  nameText,
-  onChangeHandle,
+  onInputChange,
+  valueToCompare
 }: ToggleProps) {
+  // Find index of checked input (it needs for 'div.status' animate):
+  const [checkedIndex, setCheckedIndex] = useState(0)
 
-  // Generate unique ID's for a11y
-  const legendId = useId()
-  const inputId = useId()
+  useEffect(() => {
+    setCheckedIndex(inputsData.findIndex(i => i.value === valueToCompare))
+  }, [inputsData, valueToCompare])
 
-  // Dynamic addition of 'input' tag attrs:
-  let otherInputAttrs: {[key: string]: any} = {}
-
-  if (onChangeHandle) {
-    otherInputAttrs['checked'] = isChecked
-    otherInputAttrs['onChange'] = onChangeHandle
-  } else {
-    otherInputAttrs['defaultChecked'] = isChecked
-  }
+  // Setting up toggle geometry (no need to change anything):
+  const gridDir = toggleDir === 'horisontal'
+    ? 'gridTemplateColumns'
+    : 'gridTemplateRows'
   
-  if (nameText) {
-    otherInputAttrs['name'] = nameText
+  const axle = toggleDir === 'horisontal' ? 'X' : 'Y'
+  const borderSize = 4
+  const statusSize = inputSize - borderSize * 2
+  const getHalf = (num: number) => { return num / 2 }
+  
+  // Define input's handle:
+  const onChangeHandle = (value: string, index: number) => {
+    onInputChange(value)
+    setCheckedIndex(index)
   }
 
-  // Dynamic addition of 'label' tag attrs:
-  let otherLabelAttrs: {[key: string]: string} = {}
+  // ...and styles:
+  let inputStyles = s.input
 
-  if (labelsData.icon) {
-    otherLabelAttrs['role'] = 'img'
-  }
-
-  // Dynamic addition of 'label' styles (if they were passed):
-  let labelStyle = `${s.label}`
-
-  if (labelsData.icon) {
-    labelStyle = cn(s.label, {
-      [s[labelsData.icon]]: labelsData.icon
+  if (customStyles) {
+    inputStyles = cn(s.input, {
+      [customStyles]: customStyles
     })
   }
 
   return (
-    <fieldset>
-      <legend className='sr-only' id={legendId}>
+    <fieldset className={s.wrap}>
+      <legend className='sr-only'>
         { legendText }
       </legend>
 
-      <label className={s.wrap}>
-        <input
-          aria-labelledby={legendId}
-          className={s.input}
-          id={inputId}
-          role='switch'
-          type='checkbox'
-          {...otherInputAttrs}
-        />
-
-        {labelsData.text.map((txt, index) => (
-          <span
-            aria-label={txt}
-            className={labelStyle}
-            // htmlFor={inputId}
+      <div
+        className={s.container}
+        role='radiogroup'
+        style={{
+          borderRadius: getHalf(inputSize),
+          [gridDir]: `repeat(${inputsData.length}, 1fr)`
+        }}
+      >
+        {inputsData.map((item, index) => (
+          <input
+            aria-label={item.ariaLabel}
+            checked={item.value === valueToCompare}
+            className={inputStyles}
             key={index}
-            {...otherLabelAttrs}
+            name={item.name}
+            onChange={() => onChangeHandle(item.value, index)}
+            style={{
+              height: inputSize,
+              width: inputSize
+            }}
+            type='radio'
+            value={item.value}
           />
         ))}
-      </label>
+      </div>
+
+      <div
+        aria-live='polite'
+        className={s.status}
+        role='status'
+        style={{
+          borderRadius: getHalf(statusSize),
+          height: statusSize,
+          marginTop: `-${getHalf(statusSize)}px`,
+          transform: `translate${axle}(${checkedIndex * inputSize + borderSize}px)`,
+          width: statusSize
+        }}
+      />
     </fieldset>
   )
 }

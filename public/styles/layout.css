@@ -12,7 +12,7 @@ body {
     [fullbleed-start] 0
     [leftbar-start] 150px /* !!! */
     [leftbar-end content-start] 1fr
-    [content-end rightbar-start] 100px /* !!! */
+    [content-end rightbar-start] 56px /* !!! */
     [rightbar-end] 0 [fullbleed-end];
   grid-template-rows:
     [nav] min-content
@@ -20,7 +20,6 @@ body {
     [main] 1fr
     [footer] min-content
     [aside] min-content;
-  margin: 0;
   max-width: 1920px;
   min-height: 100vh;
 
@@ -28,7 +27,7 @@ body {
     grid-template-columns: 
       [fullbleed-start] 0
       [content-start] 1fr
-      [content-end rightbar-start] 100px /* !!! */
+      [content-end rightbar-start] 56px /* !!! */
       [rightbar-end] 0 [fullbleed-end];
   }
 
